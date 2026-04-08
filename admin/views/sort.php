@@ -62,12 +62,16 @@
                                         data-sortimg="<?= $value['sortimg'] ?>"
                                         data-page_count="<?= $value['page_count'] ?>"
                                         data-allow_user_post="<?= $value['allow_user_post'] ?>"
+                                        data-hp_display="<?= $value['hp_display'] ?>"
                                         data-template="<?= $value['template'] ?>">
                                         <?= $value['sortname'] ?>
                                     </a>
                                     <a href="<?= Url::sort($value['sid']) ?>" target="_blank" class="text-muted ml-2"><i class="icofont-external-link"></i></a>
                                     <?php if ($value['allow_user_post'] == 'n'): ?>
                                         <br><span class="badge small badge-orange"><?= _lang('no_contribute') ?></span>
+                                    <?php endif ?>
+                                    <?php if ($value['hp_display'] == 'n'): ?>
+                                        <br><span class="badge small badge-orange">不在主页显示</span>
                                     <?php endif ?>
                                 </td>
                                 <td><?= subString($value['description'], 0, 100) ?></td>
@@ -107,10 +111,14 @@
                                             data-sortimg="<?= $value['sortimg'] ?>"
                                             data-page_count="<?= $value['page_count'] ?>"
                                             data-allow_user_post="<?= $value['allow_user_post'] ?>"
+                                            data-hp_display="<?= $value['hp_display'] ?>"
                                             data-template="<?= $value['template'] ?>"><?= $value['sortname'] ?></a>
                                         <a href="<?= Url::sort($value['sid']) ?>" target="_blank" class="text-muted ml-2"><i class="icofont-external-link"></i></a>
                                         <?php if ($value['allow_user_post'] == 'n'): ?>
                                             <br><span class="badge small badge-orange"><?= _lang('no_contribute') ?></span>
+                                        <?php endif ?>
+                                        <?php if ($value['hp_display'] == 'n'): ?>
+                                            <br><span class="badge small badge-orange">不在主页显示</span>
                                         <?php endif ?>
                                     </td>
                                     <td><?= subString($value['description'], 0, 100) ?></td>
@@ -218,6 +226,11 @@
                         <input class="custom-control-input" type="checkbox" name="allow_user_post" id="allow_user_post" value="y">
                         <label class="custom-control-label" for="allow_user_post"><?= _lang('allow_contribute') ?></label>
                     </div>
+                    <div class="custom-control custom-switch">
+                        <input class="custom-control-input" type="checkbox" name="hp_display" id="hp_display"
+                            value="y">
+                        <label class="custom-control-label" for="hp_display">主页显示</label>
+                    </div>
                     <?php doAction('adm_sort_add') ?>
                 </div>
                 <div class="modal-footer border-0">
@@ -309,6 +322,9 @@
             var sortimg = button.data('sortimg')
             var page_count = button.data('page_count')
             var allow_user_post = button.data('allow_user_post')
+
+            var hp_display = button.data('hp_display')
+
             var modal = $(this)
             modal.find('.modal-body #sortname').val(sortname)
             modal.find('.modal-body #alias').val(alias)
@@ -320,6 +336,7 @@
             modal.find('.modal-body #sortimg').val(sortimg)
             modal.find('.modal-body #page_count').val(page_count)
             modal.find('.modal-body #allow_user_post').prop('checked', !sid || allow_user_post === 'y')
+            modal.find('.modal-body #hp_display').prop('checked', !sid || hp_display === 'y')
             modal.find('.modal-footer #sid').val(sid)
         })
     });
