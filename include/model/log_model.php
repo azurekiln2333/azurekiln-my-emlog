@@ -214,7 +214,10 @@ class Log_Model
         $d = [];
         while ($re = $this->db->fetch_array($result)) {
             $re['id'] = $re['gid'];
-            $d[] = $re;
+            // azurekiln 2025/10/18
+            if ($this->getHomeDisplayState($re) == 1) {
+                $d[] = $re;
+            }
         }
         return $d;
     }
@@ -309,6 +312,29 @@ class Log_Model
         return $logs;
     }
 
+    // 获取主页显示状态 2025/10/18 azurekiln
+    public function getHomeDisplayState($row)
+    {
+        $sort_id = (int) $row['sortid'];
+
+        if ($sort_id > 0) {
+            $sql2 = "SELECT hp_display FROM $this->table_sort WHERE sid = " . intval($sort_id);
+            $res2 = $this->db->query($sql2);
+
+            if ($res2 && $this->db->num_rows($res2) > 0) {
+                $row_sort = $this->db->fetch_array($res2);
+                $sort_display = $row_sort['hp_display'];
+            } else {
+                $sort_display = 'y'; // 默认值
+            }
+        } else {
+            $sort_display = 'y'; // 默认值
+        }
+
+        // 如果接口未传入，先判断分类是否隐藏
+        return ($sort_display != "y" ? 0 : ($row['hp_display'] != "y" ? 0 : 1));
+    }
+
     public function getLogsForHome($condition = '', $page = 1, $perPageNum = 10)
     {
         $start_limit = !empty($page) ? ($page - 1) * $perPageNum : 0;
@@ -365,7 +391,10 @@ class Log_Model
         while ($row = $this->db->fetch_array($res)) {
             $row['date'] = date("Y-m-d H:i", $row['date']);
             $row['title'] = !empty($row['title']) ? htmlspecialchars($row['title']) : '无标题';
-            $pages[] = $row;
+            // azurekiln 2025/10/18
+            if ($this->getHomeDisplayState($row) == 1) {
+                $pages[] = $row;
+            }
         }
         return $pages;
     }
@@ -466,7 +495,10 @@ class Log_Model
         while ($row = $this->db->fetch_array($res)) {
             $row['gid'] = (int)$row['gid'];
             $row['title'] = htmlspecialchars($row['title']);
-            $logs[] = $row;
+            // azurekiln 2025/10/18
+            if ($this->getHomeDisplayState($row) == 1) {
+                $logs[] = $row;
+            }
         }
         return $logs;
     }
@@ -494,7 +526,10 @@ class Log_Model
             $row['title'] = htmlspecialchars($row['title']);
             $row['cover'] = $row['cover'] ? getFileUrl($row['cover']) : '';
             $row['log_url'] = Url::log($row['gid']);
-            $logs[] = $row;
+            // azurekiln 2025/10/18
+            if ($this->getHomeDisplayState($row) == 1) {
+                $logs[] = $row;
+            }
         }
         return $logs;
     }

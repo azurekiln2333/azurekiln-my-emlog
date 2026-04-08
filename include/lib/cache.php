@@ -358,6 +358,29 @@ class Cache
         $this->cacheWrite($cacheData, 'navi');
     }
 
+   // 获取主页显示状态 2025/10/18 azurekiln
+    private function getHomeDisplayState($row)
+    {
+        $sort_id = (int) $row['sortid'];
+
+        if ($sort_id > 0) {
+            $sql2 = "SELECT hp_display FROM " . DB_PREFIX . "_sort WHERE sid = " . intval($sort_id);
+            $res2 = $this->db->query($sql2);
+
+            if ($res2 && $this->db->num_rows($res2) > 0) {
+                $row_sort = $this->db->fetch_array($res2);
+                $sort_display = $row_sort['hp_display'];
+            } else {
+                $sort_display = 'y'; // 默认值
+            }
+        } else {
+            $sort_display = 'y'; // 默认值
+        }
+
+        // 如果接口未传入，先判断分类是否隐藏
+        return ($sort_display != "y" ? 0 : ($row['hp_display'] != "y" ? 0 : 1));
+    }
+
     private function mc_newlog()
     {
         $index_newlognum = Option::get('index_newlognum');
@@ -373,7 +396,11 @@ class Cache
             $row['gid'] = (int)$row['gid'];
             $row['title'] = htmlspecialchars($row['title']);
             $row['cover'] = $row['cover'] ? getFileUrl($row['cover']) : '';
-            $logs[] = $row;
+           
+            // azurekiln 2025/10/18
+            if ($this->getHomeDisplayState($row) == 1) {
+                $logs[] = $row;
+            }
         }
         $cacheData = serialize($logs);
         $this->cacheWrite($cacheData, 'newlog');

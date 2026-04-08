@@ -122,22 +122,22 @@ class Api_Controller
         }
 
         $logData = [
-            'title'        => $title,
-            'content'      => $content,
-            'excerpt'      => $excerpt,
-            'author'       => $author_uid,
-            'sortid'       => $sort_id,
-            'cover'        => $cover,
-            'date'         => strtotime($post_date ?: date('Y-m-d H:i:s')),
-            'hide'         => $draft === 'y' ? 'y' : 'n',
-            'checked'      => $checked,
-            'alias'        => $alias,
-            'top '         => $top,
-            'sortop '      => $sortop,
+            'title' => $title,
+            'content' => $content,
+            'excerpt' => $excerpt,
+            'author' => $author_uid,
+            'sortid' => $sort_id,
+            'cover' => $cover,
+            'date' => strtotime($post_date ?: date('Y-m-d H:i:s')),
+            'hide' => $draft === 'y' ? 'y' : 'n',
+            'checked' => $checked,
+            'alias' => $alias,
+            'top ' => $top,
+            'sortop ' => $sortop,
             'allow_remark' => $allow_remark,
-            'password'     => $password,
-            'link'         => $link,
-            'template'     => $template,
+            'password' => $password,
+            'link' => $link,
+            'template' => $template,
         ];
 
         $article_id = $this->Log_Model->addlog($logData);
@@ -178,14 +178,14 @@ class Api_Controller
         }
 
         $logData = [
-            'title'   => $title,
+            'title' => $title,
             'content' => $content,
             'excerpt' => $excerpt,
-            'sortid'  => $sort_id,
-            'cover'   => $cover,
-            'author'  => $author_uid,
-            'date'    => strtotime($post_date ?: date('Y-m-d H:i:s')),
-            'hide'    => $draft === 'y' ? 'y' : 'n',
+            'sortid' => $sort_id,
+            'cover' => $cover,
+            'author' => $author_uid,
+            'date' => strtotime($post_date ?: date('Y-m-d H:i:s')),
+            'hide' => $draft === 'y' ? 'y' : 'n',
         ];
 
         $this->Log_Model->updateLog($logData, $id, $author_uid);
@@ -251,29 +251,44 @@ class Api_Controller
         $articles = [];
         foreach ($r as $value) {
             $author = $this->getAuthor($value['author']);
-            $articles[] = [
-                'id'          => (int)$value['gid'],
-                'title'       => $value['title'],
-                'cover'       => $value['log_cover'],
-                'url'         => $value['log_url'],
-                'description' => $value['log_description'],
-                'description_raw' => empty($value['excerpt']) ? $value['content'] : $value['excerpt'],
-                'date'        => date('Y-m-d H:i:s', $value['date']),
-                'author_id'   => (int)$value['author'],
-                'author_name' => $author['nickname'],
-                'author_avatar' => $author['avatar'],
-                'sort_id'     => (int)$value['sortid'],
-                'sort_name'   => isset($sort_cache[$value['sortid']]['sortname']) ? $sort_cache[$value['sortid']]['sortname'] : '',
-                'views'       => (int)$value['views'],
-                'comnum'      => (int)$value['comnum'],
-                'like_count'  => (int)$value['like_count'],
-                'top'         => $value['top'],
-                'sortop'      => $value['sortop'],
-                'tags'        => $this->getTags((int)$value['gid']),
-                'need_pwd'    => $value['password'] ? 'y' : 'n',
-                'fields'      => $value['fields'],
-                'parent_id'   => (int)$value['parent_id'],
-            ];
+
+            // azurekiln 2025/10/18
+            // 文章是否在主页显示
+            if ($hp_display == 1) {
+                // 如果接口传入则输出文章
+                $article_hp_display = 1;
+            } else {
+                // 分类是否在主页显示
+                $sort_display = isset($sort_cache[$value['sortid']]['hp_display']) ? $sort_cache[$value['sortid']]['hp_display'] : 'y';
+                // 如果接口未传入，先判断分类是否隐藏
+                $article_hp_display = $sort_display != "y" ? 0 : ($value['hp_display'] != "y" ? 0 : 1);
+            }
+
+            if ($article_hp_display == 1) {
+                $articles[] = [
+                    'id' => (int) $value['gid'],
+                    'title' => $value['title'],
+                    'cover' => $value['log_cover'],
+                    'url' => $value['log_url'],
+                    'description' => $value['log_description'],
+                    'description_raw' => empty($value['excerpt']) ? $value['content'] : $value['excerpt'],
+                    'date' => date('Y-m-d H:i:s', $value['date']),
+                    'author_id' => (int) $value['author'],
+                    'author_name' => $author['nickname'],
+                    'author_avatar' => $author['avatar'],
+                    'sort_id' => (int) $value['sortid'],
+                    'sort_name' => isset($sort_cache[$value['sortid']]['sortname']) ? $sort_cache[$value['sortid']]['sortname'] : '',
+                    'views' => (int) $value['views'],
+                    'comnum' => (int) $value['comnum'],
+                    'like_count' => (int) $value['like_count'],
+                    'top' => $value['top'],
+                    'sortop' => $value['sortop'],
+                    'tags' => $this->getTags((int) $value['gid']),
+                    'need_pwd' => $value['password'] ? 'y' : 'n',
+                    'fields' => $value['fields'],
+                    'parent_id' => (int) $value['parent_id'],
+                ];
+            }
         }
 
         output::ok([
@@ -304,28 +319,28 @@ class Api_Controller
         $author = $this->getAuthor($r['author']);
 
         $article = [
-            'title'         => $r['log_title'],
-            'date'          => date('Y-m-d H:i:s', $r['date']),
-            'id'            => (int)$r['logid'],
-            'sort_id'       => (int)$r['sortid'],
-            'sort_name'     => isset($sort_cache[$r['sortid']]['sortname']) ? $sort_cache[$r['sortid']]['sortname'] : '',
-            'type'          => $r['type'],
-            'author_id'     => (int)$r['author'],
-            'author_name'   => $author['nickname'],
+            'title' => $r['log_title'],
+            'date' => date('Y-m-d H:i:s', $r['date']),
+            'id' => (int) $r['logid'],
+            'sort_id' => (int) $r['sortid'],
+            'sort_name' => isset($sort_cache[$r['sortid']]['sortname']) ? $sort_cache[$r['sortid']]['sortname'] : '',
+            'type' => $r['type'],
+            'author_id' => (int) $r['author'],
+            'author_name' => $author['nickname'],
             'author_avatar' => $author['avatar'],
-            'content'       => $r['log_content'],
-            'content_raw'   => $r['content_raw'],
-            'excerpt'       => $r['excerpt'],
-            'excerpt_raw'   => $r['excerpt_raw'],
-            'cover'         => $r['log_cover'],
-            'views'         => (int)$r['views'],
-            'comnum'        => (int)$r['comnum'],
-            'like_count'    => (int)$r['like_count'],
-            'top'           => $r['top'],
-            'sortop'        => $r['sortop'],
-            'tags'          => $this->getTags($id),
-            'fields'        => $r['fields'],
-            'parent_id'     => (int)$r['parent_id'],
+            'content' => $r['log_content'],
+            'content_raw' => $r['content_raw'],
+            'excerpt' => $r['excerpt'],
+            'excerpt_raw' => $r['excerpt_raw'],
+            'cover' => $r['log_cover'],
+            'views' => (int) $r['views'],
+            'comnum' => (int) $r['comnum'],
+            'like_count' => (int) $r['like_count'],
+            'top' => $r['top'],
+            'sortop' => $r['sortop'],
+            'tags' => $this->getTags($id),
+            'fields' => $r['fields'],
+            'parent_id' => (int) $r['parent_id'],
         ];
 
         $this->Log_Model->updateViewCount($id);
@@ -354,24 +369,24 @@ class Api_Controller
         $author = $this->getAuthor($r['author']);
 
         $article = [
-            'title'         => $r['title'],
-            'date'          => date('Y-m-d H:i:s', $r['date']),
-            'id'            => (int)$r['gid'],
-            'sort_id'       => (int)$r['sortid'],
-            'sort_name'     => isset($sort_cache[$r['sortid']]['sortname']) ? $sort_cache[$r['sortid']]['sortname'] : '',
-            'author_id'     => (int)$r['author'],
-            'author_name'   => $author['nickname'],
+            'title' => $r['title'],
+            'date' => date('Y-m-d H:i:s', $r['date']),
+            'id' => (int) $r['gid'],
+            'sort_id' => (int) $r['sortid'],
+            'sort_name' => isset($sort_cache[$r['sortid']]['sortname']) ? $sort_cache[$r['sortid']]['sortname'] : '',
+            'author_id' => (int) $r['author'],
+            'author_name' => $author['nickname'],
             'author_avatar' => $author['avatar'],
-            'content'       => $r['content'],
-            'excerpt'       => $r['excerpt'],
-            'cover'         => $r['cover'],
-            'views'         => (int)$r['views'],
-            'comnum'        => (int)$r['comnum'],
-            'like_count'    => (int)$r['like_count'],
-            'top'           => $r['top'],
-            'sortop'        => $r['sortop'],
-            'tags'          => $this->getTags($id),
-            'fields'        => $r['fields'],
+            'content' => $r['content'],
+            'excerpt' => $r['excerpt'],
+            'cover' => $r['cover'],
+            'views' => (int) $r['views'],
+            'comnum' => (int) $r['comnum'],
+            'like_count' => (int) $r['like_count'],
+            'top' => $r['top'],
+            'sortop' => $r['sortop'],
+            'tags' => $this->getTags($id),
+            'fields' => $r['fields'],
         ];
 
         $this->Log_Model->updateViewCount($id);
@@ -393,24 +408,24 @@ class Api_Controller
         foreach ($r as $value) {
             $author = $this->getAuthor($value['author']);
             $drafts[] = [
-                'id'          => (int)$value['gid'],
-                'title'       => $value['title'],
-                'cover'       => $value['cover'],
-                'excerpt'     => $value['excerpt'],
-                'date'        => date('Y-m-d H:i:s', $value['date']),
-                'author_id'   => (int)$value['author'],
+                'id' => (int) $value['gid'],
+                'title' => $value['title'],
+                'cover' => $value['cover'],
+                'excerpt' => $value['excerpt'],
+                'date' => date('Y-m-d H:i:s', $value['date']),
+                'author_id' => (int) $value['author'],
                 'author_name' => $author['nickname'],
                 'author_avatar' => $author['avatar'],
-                'sort_id'     => (int)$value['sortid'],
-                'sort_name'   => isset($sort_cache[$value['sortid']]['sortname']) ? $sort_cache[$value['sortid']]['sortname'] : '',
-                'views'       => (int)$value['views'],
-                'comnum'      => (int)$value['comnum'],
-                'like_count'  => (int)$value['like_count'],
-                'top'         => $value['top'],
-                'sortop'      => $value['sortop'],
-                'tags'        => $this->getTags((int)$value['gid']),
-                'need_pwd'    => $value['password'] ? 'y' : 'n',
-                'fields'      => Field::getFields((int)$value['gid']),
+                'sort_id' => (int) $value['sortid'],
+                'sort_name' => isset($sort_cache[$value['sortid']]['sortname']) ? $sort_cache[$value['sortid']]['sortname'] : '',
+                'views' => (int) $value['views'],
+                'comnum' => (int) $value['comnum'],
+                'like_count' => (int) $value['like_count'],
+                'top' => $value['top'],
+                'sortop' => $value['sortop'],
+                'tags' => $this->getTags((int) $value['gid']),
+                'need_pwd' => $value['password'] ? 'y' : 'n',
+                'fields' => Field::getFields((int) $value['gid']),
             ];
         }
 
@@ -459,10 +474,10 @@ class Api_Controller
 
         $data = [
             'content' => $t,
-            'author'  => $author_uid,
+            'author' => $author_uid,
             'private' => $private,
-            'date'    => time(),
-            'ip'      => getIp(),
+            'date' => time(),
+            'ip' => getIp(),
         ];
 
         $id = $this->Twitter_Model->addTwitter($data);
@@ -490,14 +505,14 @@ class Api_Controller
         foreach ($r as $value) {
             $author = $this->getAuthor($value['author']);
             $notes[] = [
-                'id'          => (int)$value['id'],
-                't'           => $value['t'],
-                't_raw'       => $value['t_raw'],
-                'date'        => $value['date'],
-                'author_id'   => (int)$value['author'],
+                'id' => (int) $value['id'],
+                't' => $value['t'],
+                't_raw' => $value['t_raw'],
+                'date' => $value['date'],
+                'author_id' => (int) $value['author'],
                 'author_name' => $author['nickname'],
                 'author_avatar' => $author['avatar'],
-                'ip'            => $value['ip'],
+                'ip' => $value['ip'],
             ];
         }
         output::ok(['notes' => $notes,]);
@@ -508,15 +523,15 @@ class Api_Controller
         $this->checkAuthCookie();
 
         $data = [
-            'uid'         => (int)$this->curUserInfo['uid'],
-            'nickname'    => htmlspecialchars($this->curUserInfo['nickname']),
-            'role'        => $this->curUserInfo['role'],
-            'photo'       => $this->curUserInfo['photo'],
-            'avatar'      => $this->curUserInfo['photo'] ? BLOG_URL . str_replace("../", '', $this->curUserInfo['photo']) : '',
-            'email'       => $this->curUserInfo['email'],
+            'uid' => (int) $this->curUserInfo['uid'],
+            'nickname' => htmlspecialchars($this->curUserInfo['nickname']),
+            'role' => $this->curUserInfo['role'],
+            'photo' => $this->curUserInfo['photo'],
+            'avatar' => $this->curUserInfo['photo'] ? BLOG_URL . str_replace("../", '', $this->curUserInfo['photo']) : '',
+            'email' => $this->curUserInfo['email'],
             'description' => htmlspecialchars($this->curUserInfo['description']),
-            'ip'          => $this->curUserInfo['ip'],
-            'create_time' => (int)$this->curUserInfo['create_time'],
+            'ip' => $this->curUserInfo['ip'],
+            'create_time' => (int) $this->curUserInfo['create_time'],
         ];
 
         output::ok(['userinfo' => $data]);
@@ -534,12 +549,12 @@ class Api_Controller
         }
 
         $data = [
-            'uid'         => (int)$userInfo['uid'],
-            'nickname'    => htmlspecialchars($userInfo['nickname']),
-            'role'        => $userInfo['role'],
-            'avatar'      => getFileUrl($userInfo['photo']),
+            'uid' => (int) $userInfo['uid'],
+            'nickname' => htmlspecialchars($userInfo['nickname']),
+            'role' => $userInfo['role'],
+            'avatar' => getFileUrl($userInfo['photo']),
             'description' => htmlspecialchars($userInfo['description']),
-            'create_time' => (int)$userInfo['create_time'],
+            'create_time' => (int) $userInfo['create_time'],
         ];
 
         output::ok(['userinfo' => $data]);
@@ -632,12 +647,12 @@ class Api_Controller
         $likes = [];
         foreach ($r as $value) {
             $likes[] = [
-                'id'          => (int)$value['id'],
-                'gid'         => (int)$value['gid'],
-                'uid'         => (int)$value['uid'],
-                'date'        => $value['date'],
-                'avatar'      => $value['avatar'],
-                'poster'      => $value['poster'],
+                'id' => (int) $value['id'],
+                'gid' => (int) $value['gid'],
+                'uid' => (int) $value['uid'],
+                'date' => $value['date'],
+                'avatar' => $value['avatar'],
+                'poster' => $value['poster'],
             ];
         }
 
@@ -653,7 +668,7 @@ class Api_Controller
             foreach ($tag_names as $value) {
                 $tags[] = [
                     'name' => htmlspecialchars($value),
-                    'url'  => Url::tag(rawurlencode($value)),
+                    'url' => Url::tag(rawurlencode($value)),
                 ];
             }
         }
@@ -720,6 +735,6 @@ class Api_Controller
             Output::authError('auth cookie error');
         }
         $this->curUserInfo = $userInfo;
-        $this->curUid = (int)$userInfo['uid'];
+        $this->curUid = (int) $userInfo['uid'];
     }
 }

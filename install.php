@@ -418,6 +418,7 @@ CREATE TABLE {$db_prefix}blog (
     top enum('n','y') NOT NULL default 'n' COMMENT '置顶',
     sortop enum('n','y') NOT NULL default 'n' COMMENT '分类置顶',
     hide enum('n','y') NOT NULL default 'n' COMMENT '草稿y',
+    hp_display enum('n','y') NOT NULL default 'n' COMMENT '主页显示y',
     checked enum('n','y') NOT NULL default 'y' COMMENT '文章是否审核',
     allow_remark enum('n','y') NOT NULL default 'y' COMMENT '允许评论y',
     password varchar(255) NOT NULL default '' COMMENT '访问密码',
@@ -624,6 +625,7 @@ CREATE TABLE {$db_prefix}sort (
     sortimg varchar(512) NOT NULL default '' COMMENT '分类图像',
     page_count int(11) unsigned NOT NULL default '0' COMMENT '每页文章数量',
     allow_user_post enum('n','y') NOT NULL default 'y' COMMENT '是否接受注册用户投稿',
+    hp_display enum('n','y') NOT NULL default 'n' COMMENT '主页显示y',
     PRIMARY KEY  (sid)
 )" . $table_charset_sql . "
 DROP TABLE IF EXISTS {$db_prefix}user;
