@@ -636,7 +636,7 @@ return [
 
     // Store Errors & Messages
     'store_install_failed' => 'Installation Failed',
-    'store_register_error' => 'please Register Now. <a href="https://www.emlog.net/register" target="_blank">Register Now</a>',
+    'store_register_error' => 'please Register Now. <a href="https://www.emlog.net.cn/register" target="_blank">Register Now</a>',
     'store_install_timeout' => 'Installation Failed: Download Timeout',
     'store_install_success_link' => '🎉🎈App installed successfully. <a href="%s">Enable Now</a>',
     'store_install_failed_permission' => 'Installation failed: Check content directory permissions',
@@ -648,9 +648,9 @@ return [
     'store_load_failed' => 'Load failed, click to retry',
     'store_collect_success' => 'Added to favorites',
     'store_param_error' => 'Parameter error, please refresh and try again',
-    'store_favorite_need_auth' => 'This feature is currently unavailable. Please Register Now. <a href="https://www.emlog.net/register">Register Now</a>',
+    'store_favorite_need_auth' => 'This feature is currently unavailable. Please Register Now. <a href="https://www.emlog.net.cn/register">Register Now</a>',
     'store_no_favorite' => 'No favorites yet.',
-    'store_mine_need_auth' => 'This feature is currently unavailable. Please Register Now. <a href="https://www.emlog.net/register">Register Now</a>',
+    'store_mine_need_auth' => 'This feature is currently unavailable. Please Register Now. <a href="https://www.emlog.net.cn/register">Register Now</a>',
     'store_no_purchased' => 'No purchased apps yet.',
 
     // Link
@@ -797,7 +797,7 @@ return [
     'plugin_only_zip' => 'Only zip format plugin packages are supported.',
     'upload_size_exceeded' => 'Upload package size exceeds PHP limit.',
     'emlog_not_registered' => 'Your emlog is not Registered.',
-    'plugin_register_error_link' => 'Your emlog is not Registered, <a href="https://www.emlog.net/register" target="_blank">Register Now</a>',
+    'plugin_register_error_link' => 'Your emlog is not Registered, <a href="https://www.emlog.net.cn/register" target="_blank">Register Now</a>',
     'system_plugin_warning' => 'System dependency plugin, please do not delete or disable.',
     'plugin_extension' => 'Plugin Extension',
     'install_plugin' => 'Install Plugin',

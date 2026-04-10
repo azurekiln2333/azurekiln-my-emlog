@@ -84,7 +84,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                     }
                 </p>
-                <?= _lang('more_rewrite_rules'); ?>：<a href="https://www.emlog.net/docs/faq" target="_blank"><?= _lang('faq'); ?></a>
+                <?= _lang('more_rewrite_rules'); ?>：<a href="https://www.emlog.net.cn/docs/faq" target="_blank"><?= _lang('faq'); ?></a>
             </div>
             <h4 class="mt-4"><?= _lang('header_info'); ?></h4>
             <div class="form-group">

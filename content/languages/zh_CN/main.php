@@ -636,7 +636,7 @@ return [
 
     // Store Errors & Messages
     'store_install_failed' => '安装失败',
-    'store_register_error' => 'emlog未正版注册，<a href="https://www.emlog.net/register" target="_blank">去注册</a>',
+    'store_register_error' => 'emlog未正版注册，<a href="https://www.emlog.net.cn/register" target="_blank">去注册</a>',
     'store_install_timeout' => '安装失败，下载超时',
     'store_install_success_link' => '🎉🎈应用安装成功了，<a href="%s">现在去启用</a>',
     'store_install_failed_permission' => '安装失败，请检查content下目录是否可写',
@@ -648,9 +648,9 @@ return [
     'store_load_failed' => '加载失败，点击重试加载',
     'store_collect_success' => '收藏成功',
     'store_param_error' => '参数错误，请刷新页面重试',
-    'store_favorite_need_auth' => '您还不是正版注册用户，无法使用应用商店收藏功能，<a href="https://www.emlog.net/register">付费支持 &rarr;</a>',
+    'store_favorite_need_auth' => '您还不是正版注册用户，无法使用应用商店收藏功能，<a href="https://www.emlog.net.cn/register">付费支持 &rarr;</a>',
     'store_no_favorite' => '还没有收藏任何应用。',
-    'store_mine_need_auth' => '您还不是正版注册用户，无法使用应用商店已购功能，<a href="https://www.emlog.net/register">付费支持 &rarr;</a>',
+    'store_mine_need_auth' => '您还不是正版注册用户，无法使用应用商店已购功能，<a href="https://www.emlog.net.cn/register">付费支持 &rarr;</a>',
     'store_no_purchased' => '还没有购买任何应用。',
 
     // Link
@@ -798,7 +798,7 @@ return [
     'plugin_only_zip' => '只支持zip压缩格式的插件包',
     'upload_size_exceeded' => '上传安装包大小超出PHP限制',
     'emlog_not_registered' => '您的emlog未完成正版注册',
-    'plugin_register_error_link' => '您的emlog未完成正版注册，<a href="https://www.emlog.net/register" target="_blank">去注册</a>',
+    'plugin_register_error_link' => '您的emlog未完成正版注册，<a href="https://www.emlog.net.cn/register" target="_blank">去注册</a>',
     'system_plugin_warning' => '系统依赖插件，请勿删除和关闭',
     'plugin_extension' => '插件扩展',
     'install_plugin' => '安装插件',

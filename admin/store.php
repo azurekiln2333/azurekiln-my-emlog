@@ -193,7 +193,7 @@ if ($action === 'install') {
         Output::json(['code' => 400, 'msg' => _lang('store_install_failed')]);
     }
 
-    $store_url = 'https://store.emlog.net/';
+    $store_url = 'https://www.emlog.net.cn/';
     $temp_file = emFetchFile($store_url . $source);
 
     if (!$temp_file) {

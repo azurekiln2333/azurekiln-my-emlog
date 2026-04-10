@@ -21,7 +21,7 @@
             <?php foreach ($apps as $k => $v):
                 $icon = $v['icon'] ?: "./views/images/theme.png";
                 $type = $v['app_type'] === 'template' ? 'tpl' : 'plugin';
-                $order_url = 'https://www.emlog.net/order/submit/' . $type . '/' . $v['id']
+                $order_url = 'https://www.emlog.net.cn/order/submit/' . $type . '/' . $v['id']
             ?>
                 <div class="col-md-6 col-lg-3">
                     <div class="card mb-4 shadow-sm hover-shadow-lg">

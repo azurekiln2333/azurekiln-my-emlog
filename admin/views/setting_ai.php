@@ -210,7 +210,7 @@
             API Key：<a href="https://cloud.siliconflow.cn/me/account/ak" target="_blank"><?= _lang('generate_api_key'); ?></a><br>
             Model：Qwen/Qwen3-8B、THUDM/GLM-4-9B-0414<br>
             <hr>
-            <?= _lang('support_openai_model'); ?>，<a href="https://www.emlog.net/docs/ai/ai_emlog" target="_blank"><?= _lang('more_ai_models'); ?></a><br>
+            <?= _lang('support_openai_model'); ?>，<a href="https://www.emlog.net.cn/docs/ai/ai_emlog" target="_blank"><?= _lang('more_ai_models'); ?></a><br>
         `;
     }
 
@@ -227,7 +227,7 @@
             API Key：<a href="https://console.volcengine.com/auth/login?redirectURI=%2Fark" target="_blank"><?= _lang('generate_api_key'); ?></a><br>
             Model：doubao-seedream-3-0-t2i-250415<br>
             <hr>
-            <?= _lang('support_openai_image_model'); ?>，<a href="https://www.emlog.net/docs/ai/ai_emlog" target="_blank"><?= _lang('more_ai_models'); ?></a><br>
+            <?= _lang('support_openai_image_model'); ?>，<a href="https://www.emlog.net.cn/docs/ai/ai_emlog" target="_blank"><?= _lang('more_ai_models'); ?></a><br>
         `;
     }
 </script>

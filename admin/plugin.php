@@ -187,7 +187,7 @@ if ($action === 'check_update') {
         'apps'  => json_encode($plugins),
     ];
     $emcurl->setPost($post_data);
-    $emcurl->request('https://store.emlog.net/plugin/upgrade');
+    $emcurl->request('https://www.emlog.net.cn/plugin/upgrade');
     $retStatus = $emcurl->getHttpStatus();
     if ($retStatus !== MSGCODE_SUCCESS) {
         Output::error(_lang('plugin_update_network_error'));
@@ -211,7 +211,7 @@ if ($action === 'upgrade') {
         Output::error(_lang('emlog_not_registered'), 200);
     }
 
-    $temp_file = emFetchFile('https://www.emlog.net/plugin/down/' . $alias);
+    $temp_file = emFetchFile('https://www.emlog.net.cn/plugin/down/' . $alias);
     if (!$temp_file) {
         Output::error(_lang('plugin_download_error'), 200);
     }

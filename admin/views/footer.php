@@ -11,7 +11,7 @@
 </a>
 <footer class="sticky-footer bg-white">
     <div class="text-right my-auto mr-4">
-        <small><a href="https://www.emlog.net" target="_blank">EMLOG</a> - <?= ucfirst(Option::EMLOG_VERSION) ?></small>
+        <small><a href="https://www.emlog.net.cn" target="_blank">EMLOG</a> - <?= ucfirst(Option::EMLOG_VERSION) ?></small>
     </div>
 </footer>
 <!-- AI Chat Modal -->

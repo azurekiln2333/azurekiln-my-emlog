@@ -48,7 +48,7 @@
             <?= _lang('api_twitter_list'); ?><br>
             <?= _lang('api_media_upload'); ?><br>
             ……<br><br>
-            <?= _lang('api_doc_link'); ?>：<a href="https://www.emlog.net/docs/api" target="_blank"><?= _lang('api_doc'); ?>→</a>
+            <?= _lang('api_doc_link'); ?>：<a href="https://www.emlog.net.cn/docs/api" target="_blank"><?= _lang('api_doc'); ?>→</a>
         </div>
     </div>
 </div>

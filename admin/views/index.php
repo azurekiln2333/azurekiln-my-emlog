@@ -81,16 +81,16 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
                                 <?php if (!Register::isRegLocal()) : ?>
-                                    <a href="https://www.emlog.net/register" target="_blank"><span class="badge badge-secondary">Emlog <?= Option::EMLOG_VERSION ?></span></a>
-                                    <a href="https://www.emlog.net/register" target="_blank" class="badge badge-secondary"><?= _lang('unregistered') ?></a>
+                                    <a href="https://www.emlog.net.cn/register" target="_blank"><span class="badge badge-secondary">Emlog <?= Option::EMLOG_VERSION ?></span></a>
+                                    <a href="https://www.emlog.net.cn/register" target="_blank" class="badge badge-secondary"><?= _lang('unregistered') ?></a>
                                 <?php else: ?>
-                                    <a href="https://www.emlog.net" target="_blank"><span class="badge badge-success">Emlog <?= ucfirst(Option::EMLOG_VERSION) ?></span></a>
+                                    <a href="https://www.emlog.net.cn" target="_blank"><span class="badge badge-success">Emlog <?= ucfirst(Option::EMLOG_VERSION) ?></span></a>
                                     <?php if (Register::getRegType() === 2): ?>
-                                        <a href="https://www.emlog.net/register" target="_blank" class="badge badge-warning"><?= _lang('hardcore_svip') ?></a>
+                                        <a href="https://www.emlog.net.cn/register" target="_blank" class="badge badge-warning"><?= _lang('hardcore_svip') ?></a>
                                     <?php elseif (Register::getRegType() === 1): ?>
-                                        <a href="https://www.emlog.net/register" target="_blank" class="badge badge-success"><?= _lang('friend_vip') ?></a>
+                                        <a href="https://www.emlog.net.cn/register" target="_blank" class="badge badge-success"><?= _lang('friend_vip') ?></a>
                                     <?php else: ?>
-                                        <a href="https://www.emlog.net/register" target="_blank" class="badge badge-success"><?= _lang('registered') ?></a>
+                                        <a href="https://www.emlog.net.cn/register" target="_blank" class="badge badge-success"><?= _lang('registered') ?></a>
                                     <?php endif ?>
                                 <?php endif; ?>
                             </div>
@@ -118,7 +118,7 @@
                         <p><span class="badge badge-warning badge-pill">3</span> <?= _lang('register_feature_3') ?></p>
                         <p><span class="badge badge-warning badge-pill">4</span> <?= _lang('register_feature_4') ?></p>
                         <p>
-                            <a href="https://www.emlog.net/register" target="_blank" class="btn btn-danger px-4">
+                            <a href="https://www.emlog.net.cn/register" target="_blank" class="btn btn-danger px-4">
                                 <?= _lang('register_now') ?>
                                 <i class="icofont-external-link me-2"></i>
                             </a>

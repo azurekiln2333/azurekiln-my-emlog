@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="form-group mt-2">
-                    <a href="https://www.emlog.net/register" target="_blank" class="text-danger"><?= _lang('get_reg_code') ?>&rarr; </a>
+                    <a href="https://www.emlog.net.cn/register" target="_blank" class="text-danger"><?= _lang('get_reg_code') ?>&rarr; </a>
                 </div>
             </form>
         <?php else: ?>

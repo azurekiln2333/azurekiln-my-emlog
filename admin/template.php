@@ -113,7 +113,7 @@ if ($action === 'check_update') {
         'apps'  => json_encode($templates),
     ];
     $emcurl->setPost($post_data);
-    $emcurl->request('https://store.emlog.net/template/upgrade');
+    $emcurl->request('https://www.emlog.net.cn/template/upgrade');
     $retStatus = $emcurl->getHttpStatus();
     if ($retStatus !== MSGCODE_SUCCESS) {
         Output::error(_lang('template_update_network_error'));
@@ -137,7 +137,7 @@ if ($action === 'upgrade') {
         Output::error(_lang('emlog_not_registered'), 200);
     }
 
-    $temp_file = emFetchFile('https://www.emlog.net/template/down/' . $alias);
+    $temp_file = emFetchFile('https://www.emlog.net.cn/template/down/' . $alias);
     if (!$temp_file) {
         Output::error(_lang('template_download_error'), 200);
     }

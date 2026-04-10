@@ -21,7 +21,7 @@ if ($action === 'check_update') {
         'timestamp' => Option::EMLOG_VERSION_TIMESTAMP,
     ]);
 
-    $emcurl->request('https://store.emlog.net/service/upgrade');
+    $emcurl->request('https://www.emlog.net.cn/service/upgrade');
     $retStatus = $emcurl->getHttpStatus();
     $response = $emcurl->getRespone();
     header('Content-Type: application/json; charset=UTF-8');
@@ -104,6 +104,6 @@ function isAllowedUpgradeHost($url)
         return false;
     }
     $host = strtolower((string)parse_url($url, PHP_URL_HOST));
-    $allowedHosts = array('www.emlog.net', 'store.emlog.net');
+    $allowedHosts = array('www.emlog.net', 'store.emlog.net', 'emlog.net.cn', 'www.emlog.net.cn');
     return in_array($host, $allowedHosts, true);
 }

@@ -5,7 +5,7 @@
             <?php foreach ($apps as $k => $v):
                 $icon = $v['icon'] ?: "./views/images/theme.png";
                 $type = $v['app_type'] === 'template' ? 'tpl' : 'plugin';
-                $order_url = 'https://www.emlog.net/order/submit/' . $type . '/' . $v['id']
+                $order_url = 'https://www.emlog.net.cn/order/submit/' . $type . '/' . $v['id']
             ?>
                 <div class="col-md-6 col-lg-3">
                     <div class="card mb-4 shadow-sm hover-shadow-lg">
@@ -25,7 +25,7 @@
                                     <span class="badge badge-primary p-1"><?= _lang('store_plu_tag') ?></span>
                                 <?php endif; ?>
                                 <?php if ($v['svip']): ?>
-                                    <a href="https://www.emlog.net/register" class="badge badge-warning p-1" target="_blank"><?= _lang('store_svip_badge') ?></a>
+                                    <a href="https://www.emlog.net.cn/register" class="badge badge-warning p-1" target="_blank"><?= _lang('store_svip_badge') ?></a>
                                 <?php endif; ?>
                             </p>
                             <p class="card-text text-muted">
@@ -157,7 +157,7 @@
                         response.data.apps.forEach(function(app) {
                             const icon = app.icon || './views/images/theme.png';
                             const type = app.app_type === 'template' ? 'tpl' : 'plugin';
-                            const orderUrl = 'https://www.emlog.net/order/submit/' + type + '/' + app.id;
+                            const orderUrl = 'https://www.emlog.net.cn/order/submit/' + type + '/' + app.id;
 
                             // 构建按钮HTML
                             let buttonsHtml = '';
@@ -203,7 +203,7 @@
                                                 <a href="#appModal" data-toggle="modal" data-target="#appModal" data-name="${app.name}" data-url="${app.app_url}" data-buy-url="${app.buy_url}" class="h5">${app.name.substring(0, 15)}</a>
                                                 <span class="badge badge-light p-1">${app.ver}</span>
                                                 ${type === 'tpl' ? '<span class="badge badge-success p-1"><?= _lang("store_tpl_tag") ?></span>' : '<span class="badge badge-primary p-1"><?= _lang("store_plu_tag") ?></span>'}
-                                                ${app.svip ? '<a href="https://www.emlog.net/register" class="badge badge-warning p-1" target="_blank"><?= _lang("store_svip_badge") ?></a>' : ''}
+                                                ${app.svip ? '<a href="https://www.emlog.net.cn/register" class="badge badge-warning p-1" target="_blank"><?= _lang("store_svip_badge") ?></a>' : ''}
                                             </p>
                                             <p class="card-text text-muted">
                                                 <?= _lang("store_price") ?>
